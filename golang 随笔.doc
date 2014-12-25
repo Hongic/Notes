@@ -1,0 +1,135 @@
+静态文件夹的设置
+在当前项目文件夹下创建Contstant文件夹，里面创建constant.go
+/*
+	   模块 Home 的 M V C 路径
+*/
+	HOME_MODEL_PATH      = "./Home/Model/"
+	HOME_VIEW_PATH       = "./Home/View/"
+	HOME_CONTROLLER_PATH = "./Home/Controller/"
+还要在main.go 写函数
+func StaticServer(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", "text/html")
+	staticHandler := http.FileServer(http.Dir("./Public/"))
+	staticHandler.ServeHTTP(w, r)
+	return
+}
+Main（）函数加上这一句话：
+http.Handle("/Public/",http.StripPrefix("/Public/",http.FileServer(http.Dir("./Public/"))))
+其中 /Public/ 就是静态目录
+在控制器里面写 ：t, _ := template.ParseFiles(CONSTANT.HOME_VIEW_PATH + "Login/login.html")
+Import  CONSTANT "XC/Constant"
+其中模板位置： xc/Home/View/Login/login.html ，路径是相对于main.go来说的
+<img src="/Public/Image/message.jpg" width="100" height="100">
+控制器的模板变量赋值
+变量声明，关键
+data := make(map[interface{}]interface{})
+struct 类型
+data["xc"] = &xc // 结构体必须是指针，不然不能再模板上访问结构体变量
+单一结构体 :
+		{{.clc.Name}} --- 
+		{{.clc.Age}}
+Map 类型 一维
+data["cy"] = map[string]string{"Namee": "陈伊然", "Agee": "19"}
+Map CY 字典类型 :
+		
+		{{.cy.Namee}} --- 
+		{{.cy.Agee}}
+Map 类型 二维
+data["cc"] = []map[string]string{
+		{"name": "陈怡然", "age": "20"},
+		{"name": "杨敏", "age": "20"},
+		{"name": "杨幂", "age": "26"},
+	}
+Map  CC 字典类型 :
+		{{range .cc}}
+			{{.name}} --- 
+			{{.age}}
+			<br>
+		{{end}}
+Slice 类型
+data["Slice"] = []int{2014, 12, 15, 20}
+Slice 类型 :
+
+		{{range $k,$v:=.Slice}} 
+			{{$k}} --{{$v}} <br> 
+		{{end}}
+t.Execute(w, data)  //  只能写一次，避免重复加载页面
+
+MySQL  原生态操作
+conn, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/db_erp?charset=utf8")
+	if err != nil {
+		fmt.Println("数据库连接失败")
+		return
+	}
+	defer conn.Close()
+	// 查询操作
+	results, err := conn.Query("select id,name from tb_user limit 3")
+	if err != nil {
+		fmt.Println("tb_user 表查询失败", err.Error())
+		return
+	}
+	defer results.Close()
+	// 获取所查询的字段
+	cols, _ := results.Columns()
+	//  二进制结果集数组，
+   // valueByte := make([]interface{}, len(cols)) 这种方法需要修改后面
+//  row[key] = string(v.([]byte))
+	valueByte := make([]sql.RawBytes, len(cols))
+	// 转化其他类型数组
+	valueStr := make([]interface{}, len(cols))
+
+	for v := range valueByte {
+		//  数组返回值类型转换,
+		//  valueStr 变成指针数组，存放指针，为了方便 Scan() 扫描输入
+		valueStr[v] = &valueByte[v]
+	}
+	//  最后的数据
+	res := make(map[int]map[interface{}]interface{})
+	i := 0
+	for results.Next() {
+		// 数据循环扫描
+		err := results.Scan(valueStr...)
+		if err != nil {
+			fmt.Println("Error：", err)
+			return
+		}
+		//  二进制数组转化成string数组
+		row := make(map[interface{}]interface{})
+		for k, v := range valueByte {
+			key := cols[k]       // 字段
+			row[key] = string(v) // 字段对应的值
+		}
+		// 每一条数据都循环存放在二维数组，如果没有下面这一步，row只能存储最后一条数据
+		res[i] = row
+		i++
+	}
+	fmt.Println(res)
+//  mysql 内部函数的使用
+	var count int
+	conn.QueryRow("select count(*) from tb_user").Scan(&count)
+	fmt.Println(count)
+// 提前准备好条件查询的值，然后直接插入
+	count := 0
+	counts := "boss"
+	rows, _ := conn.Query("select id,name from tb_user where `id`>? and `name`=?",
+		count, counts)
+// 更新数据
+	id := 9
+	name := "平安夜，平平安安"
+	stmt, _ := conn.Prepare("update tb_user set `realName`=? where `id`=?")
+	upRes, _ := stmt.Exec(name, id)
+// 添加数据
+	stmt, _ = conn.Prepare("insert tb_user (`name`,`pwd`) values (?,?)")
+	inRes, _ := stmt.Exec("xiaoxi", "2014121520")
+// 删除数据
+	stmt, _ = conn.Prepare("delete from tb_user where `id`=?")
+	deRes, _ := stmt.Exec(29)
+
+
+
+
+
+
+
+
+
