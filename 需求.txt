@@ -1,0 +1,150 @@
+hjxu9137<gzyestop>
+
+8565+1808<gzyestop>
+219.136.241.214
+hong
+hong321654987
+
+http://everyx.in/gobyexample/  中文版实例
+http://www.360doc.com/content/13/0226/11/7362_267962118.shtml  Go语言中文文档
+
+http://blog.sina.com.cn/s/blog_6bf7e6d10100lnyb.html 5.3.3  2.2
+http://wenku.baidu.com/link?url=_o-l428J4V5m80fkM5uSRECAFIrAVxIN4AYG6o750pDL1PPfyNfrWHiNPbIXJD4o23gRAt3PfmXK9KXW-w8mLD-9CK8T4MfA2n_Bntdqtml
+
+http://tech.cncms.com/fuwuqi/webserver/qita/99423.html PHP JSP
+
+
+
+
+
+销售员（Sale）：  tb_presell
+
+登陆、退出
+
+入库CURD、销售  
+
+个人收益查看
+
+
+老板（Boss）：一个老板一个数据库  ，仅有向db_erp 添加商品信息的功能
+
+登陆、退出
+
+CURD销售人员   
+
+入库商品（独立库） tb_storage
+
+销售商品  tb_sales
+
+收益查看
+
+预售设定  tb_presell
+
+
+
+平台：ErpOpen
+
+老板信息表（个人信息） tb_user (四表) 
+
+老板建数据的信息查看 tb_user
+
+商品的类型 tb_type
+
+商品属性信息库 tb_goods
+
+
+
+
+
+
+用户名
+
+
+用户信息一个库  
+
+用户相关的四表、查阅boss、salesman所有相关信息
+tb_user（四表）：system boss salesman ，
+
+system为每个boss 创建一个库，然后库存储boss的经营产品信息， boss登陆时，会自动查找boss独有的数据库，salesman登陆时，查找上级boss的数据库
+id 用户名（唯一性） 密码 电话 邮箱 身份redirect(用于模块跳转)  属于（当前用户system）    system（权限只能由系统分配给每一组）
+id 用户名（唯一性，只读） 密码 电话 邮箱 属于（boss） （ 数据库名（bossname，跟用户名一样的属性）仅仅换库  不可更改 ） 
+id 用户名（唯一性） 密码 电话 邮箱 属于（bossname）  salesman
+
+ 
+用户经营的商品信息一个库 
+
+经营的商品、库存、预售、销售
+tb_goods、tb_storage、 tb_presell、tb_sales
+
+
+创建库的步骤：
+1、DSN连接 ，需要MySQL创建一个用户
+2、执行SQL语句，建库（db_id）
+3、加载sql文件，创建表
+4、use 回到主库操作
+
+系统管理员功能：
+
+添加老板, 修改老板信息  tb_user tb_probation
+老板（ID,姓名，身份证号，手机，手机2，固话，传真，地址，备注、是否禁用）
+
+tb_probation
+ID 老板姓名 ，是否试用，试用起始日期，试用月数，是否收费用户，收费起始日期，收费包月价格
+
+添加，修改商家 tb_company
+   商家(ID,名称，法人，法人电话，联系人，联系人电话，公司联系电话，公司地址，公司网站，备注)
+
+添加商品信息，修改商品信息 tb_goods 
+商品信息（ID,条形码ID，商家ID，名称，名称2，名称首字母，名称2首字母，单位，建议销售价）
+
+boss从主库中添加现有的商品到自己的本地库，如果主库没有，boss可以添加商品信息到主库中，然后再添加到本地库。
+
+boss入库商品只能从本地商品库添加，如果没有该商品，必须去主库添加信息后才能入库数据到本地
+
+重构 System 搜索功能 
+添加 area 字段
+判断 dbname 字段不为空时显示修改按钮，否则不显示
+删除用户时要同时删除用户的数据库
+
+更新权限的时候，显示哪些已有的权限，哪些没有分配的权限
+
+查询tb_group中rules，把字符串拆分成数组，数组每个值是否在tb_rule的id中，如果在就保存在已有权限的数组，否则存储在没有权限的数组中，然后把两个数组分开显示在前端
+
+省 - 市 级联
+
+登陆后自动识别登陆
+
+
+多条件搜索那里添加省份搜索
+
+更改所有删除操作   采用删除按钮-》操作
+类型  商家 信息
+
+多条件搜索按钮增加颜色
+
+在管理老板那里添加试用、收费按钮，以显示当前的状态，点击按钮后直接跳转到审核收费更新页面
+
+17:11 2014-11-17
+
+删除按钮 弹出 确定、取消
+
+老板添加 用户名改成登陆用户名，且不可修改
+
+
+销售员管理，加上一项“真实姓名、身份证”  你的昵称 改成 登录名
+
+删除预售表  整合到自有库中的 进货价  销售价 
+
+网上百度barcode 库 添加到本地库15:35 2014-11-2
+
+15:35 2014-11-20
+
+自有商品信息表   建议售价  进货价  销售价
+
+
+
+
+
+
+	
+

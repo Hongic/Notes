@@ -1,0 +1,9 @@
+
+
+golang 链接mysql    http://wendal.net/448.html   
+
+GoLang学习笔记 获取MySQL数据库查询返回的不定字段   http://www.du52.com/text.php?id=562
+
+中文版实例 http://everyx.in/gobyexample/  
+
+Go语言中文文档  http://www.360doc.com/content/13/0226/11/7362_267962118.shtml  

@@ -1,0 +1,102 @@
+禁止回车方案：
+
+1、当点击TextBox是用js接近回车,失去焦点时在禁止回车
+
+2、全面监听键盘，按下回车键时，禁止回车
+
+3、获取某个区域的id 禁止这个区域的键盘回车功能
+
+4、转移Enter的回车功能，例如：Enter键可以让光标移到下一个输入框 
+
+5、加入隐藏性的text文本框，整个页面都不会提交数据，<input type='text' style='display:none'/>
+
+6、多条件精准判断，根据id的唯一值判断各种表单事件的触发，再执行其他的操作event.keyCode == 13 && $(this).attr('type') != 'button' && $(this).attr('type') != 'submit' && $(this).attr('type') != 'textarea' && $(this).attr('type') != 'res
+
+	自动聚焦
+        <script>
+            window.onload = function () {
+                var first = document.getElementById("bar");
+                first.focus();
+
+            }
+        </script>
+用enter回车直接切换输入(焦点),当最后一个时候，直接提交信息。
+每次点击回车的时候，获取当前的焦点位置，然后设置它的下一个元素获取焦点;
+
+
+<script type="text/javascript">
+ $('input:text:first').focus(); 
+ document.onkeydown = function enterHandler(event)
+ {
+   var inputs = $("input");           //可自行添加其它过滤条件   
+   var browser = navigator.appName ;      //浏览器名称
+   var userAgent = navigator.userAgent;     //取得浏览器的userAgent字符串 
+    
+   var Code = '' ;
+   if(browser.indexOf('Internet')>-1)      // IE  
+    Code = window.event.keyCode ;
+   else if(userAgent.indexOf("Firefox")>-1)   // 火狐
+    Code = event.which;
+   else                     // 其它
+     Code = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+   
+   if (Code == 13)               //可以自行加其它过滤条件
+   {
+     for(var i=0;i<inputs.length;i++)
+     {
+      if(inputs[i].id == document.activeElement.id)
+      {  
+        i = i== (inputs.length - 1) ? -1 : i ;
+        $('#'+ inputs[i+1].id ).focus()
+        break;
+      }
+     }
+   }
+ }
+ 
+</script>
+
+
+<script type="text/javascript"> 
+  $(function () { 
+     $('input:text:first').focus(); 
+     var $inp = $('input:text'); 
+     $inp.bind('keydown', function (e) { 
+       var key = e.which; 
+       if (key == 13) { 
+          e.preventDefault(); 
+          var nxtIdx = $inp.index(this) + 1; 
+	  $(":input:text:eq(" + nxtIdx + ")").focus(); 
+	  } 
+       }); 
+   }); 
+</script> 
+分析： 
+$('input:text:first').focus(); 
+页面初始化时，焦点定位第一个文本框内 
+var $inp = $('input:text'); 
+取的type=文本框的元素集合 
+$inp.bind('keydown', function (e) {} 
+给文本框集合绑定'keydown'事件 
+var key = e.which; 
+取的当前按下的键值 比如Enter的键值=13 
+e.preventDefault(); 
+var nxtIdx = $inp.index(this) + 1; 
+取的元素集合inp中的下一个元素索引 
+$(":input:text:eq(" + nxtIdx + ")").focus(); 
+定位焦点到集合的下一个元素 
+
+	取消特定input控件的Enter功能
+        <script>
+            $("input[id=bar]").keydown(function () {
+                var event = arguments.callee.caller.arguments[0] || window.event;//消除浏览器差异  
+                if (event.keyCode == 13) {
+                    return false;
+                }
+            })
+        </script>
+
+
+
+
+

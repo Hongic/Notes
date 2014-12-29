@@ -1,0 +1,6 @@
+
+Bootstrap教程  http://www.yeahzan.com/course/88-bs-4.html
+
+拼图 bs的山寨版   pintuter  http://www.pintuer.com/
+
+bootstrap 兼容性见解  http://hustlzp.com/post/2014/01/ie8-compatibility
