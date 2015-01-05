@@ -1,13 +1,18 @@
-blog 模板 http://www.yangqq.com/
+锘縝log 妯℃澘 http://www.yangqq.com/
 
-够味美食  http://www.gouwei.net/  （小吃网的模型）
+澶熷懗缇庨  http://www.gouwei.net/  锛堝皬鍚冪綉鐨勬ā鍨嬶級
 
-golang 链接mysql    http://wendal.net/448.html   
+golang mysql    http://wendal.net/448.html   
 
-GoLang学习笔记 获取MySQL数据库查询返回的不定字段   http://www.du52.com/text.php?id=562
+GoLang mysql   http://www.du52.com/text.php?id=562
 
-中文版实例 http://everyx.in/gobyexample/  
+  http://everyx.in/gobyexample/  
 
-Go语言中文文档  http://www.360doc.com/content/13/0226/11/7362_267962118.shtml 
 
-GoSublime的默认快捷键  http://www.haodaima.net/art/1893264 
+Go璇█涓枃鏂囨。  http://www.360doc.com/content/13/0226/11/7362_267962118.shtml 
+
+GoSublime鐨勯粯璁ゅ揩鎹烽敭  http://www.haodaima.net/art/1893264 
+
+Go   http://www.360doc.com/content/13/0226/11/7362_267962118.shtml  
+
+
