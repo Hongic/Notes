@@ -10,6 +10,12 @@ blog 模板 http://www.yangqq.com/
 
 多说评论插件  http://dev.duoshuo.com/
 
+boostrap 表单验证 https://github.com/mrlong/bootstrap3-validation.js
+
+jQuery validate  http://www.helloweba.com/view-blog-53.html
+
+w3c 菜鸟教程  http://www.w3cschool.cc/jquery/jquery-plugin-validate.html
+
 
 
 
