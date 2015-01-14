@@ -16,7 +16,9 @@ jQuery validate  http://www.helloweba.com/view-blog-53.html
 
 w3c 菜鸟教程  http://www.w3cschool.cc/jquery/jquery-plugin-validate.html
 
+Wolfram 
 
+Sugata Mitra:构筑"云端学院"  http://v.youku.com/v_show/id_XNzg5NDgzNjMy.html
 
 
 GO 语言资料
@@ -33,3 +35,9 @@ Go语言中文文档  http://www.360doc.com/content/13/0226/11/7362_267962118.sh
 GoSublime的默认快捷键  http://www.haodaima.net/art/1893264 
 
 Go语言中文文档   http://www.360doc.com/content/13/0226/11/7362_267962118.shtml  
+
+Go实战开发    https://github.com/astaxie/Go-in-Action/blob/master/ebook/zh/preface.md
+
+Go20 电商平台  https://github.com/atnet/go2o/tree/master
+
+Golang的pkg的函数讲解  http://git.oschina.net/widuu/gopkg/tree/master/io1
